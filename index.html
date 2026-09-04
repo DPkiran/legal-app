@@ -81,20 +81,31 @@
     <h1>Legal reference tool</h1>
     <p>Internal tool &mdash; access restricted to the Legal team</p>
   </header>
-
   <main>
     <div id="user-info">Loading signed-in user...</div>
-
     <div class="card">
       <h2>Named individuals register <span class="badge">Live</span></h2>
       <p>Placeholder section &mdash; this is where the synced dataset will render once content is wired up.</p>
     </div>
-
     <div class="card">
       <h2>Role records</h2>
       <p>Placeholder section for role-based records.</p>
     </div>
   </main>
+
+  <script>
+    // Break out of iframe for Teams tab auth (must run before the normal check below)
+    if (window.self !== window.top) {
+      fetch('/.auth/me')
+        .then(r => r.json())
+        .then(data => {
+          if (!data.clientPrincipal) {
+            window.top.location.href = window.location.origin +
+              '/.auth/login/aad?post_login_redirect_uri=' + encodeURIComponent(window.location.href);
+          }
+        });
+    }
+  </script>
 
   <script>
     // Static Web Apps exposes signed-in user info at /.auth/me
