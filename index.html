@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Legal Reference Tool</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --border: #e2e4e8;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --accent: #185fa5;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 32px;
+  }
+  header h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  header p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  main {
+    max-width: 720px;
+    margin: 32px auto;
+    padding: 0 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 15px;
+    margin: 0 0 8px;
+  }
+  .card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+  }
+  #user-info {
+    font-size: 13px;
+    background: #eef4fb;
+    border: 1px solid #cfe0f0;
+    color: var(--accent);
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #eef4fb;
+    color: var(--accent);
+    margin-left: 8px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>Legal reference tool</h1>
+    <p>Internal tool &mdash; access restricted to the Legal team</p>
+  </header>
+
+  <main>
+    <div id="user-info">Loading signed-in user...</div>
+
+    <div class="card">
+      <h2>Named individuals register <span class="badge">Live</span></h2>
+      <p>Placeholder section &mdash; this is where the synced dataset will render once content is wired up.</p>
+    </div>
+
+    <div class="card">
+      <h2>Role records</h2>
+      <p>Placeholder section for role-based records.</p>
+    </div>
+  </main>
+
+  <script>
+    // Static Web Apps exposes signed-in user info at /.auth/me
+    fetch('/.auth/me')
+      .then(r => r.json())
+      .then(data => {
+        const info = document.getElementById('user-info');
+        const principal = data.clientPrincipal;
+        if (principal) {
+          info.textContent = 'Signed in as ' + principal.userDetails;
+        } else {
+          info.textContent = 'Not signed in';
+        }
+      })
+      .catch(() => {
+        document.getElementById('user-info').textContent =
+          'Auth info unavailable (expected when testing locally without SWA CLI emulator)';
+      });
+  </script>
+</body>
+</html>
