@@ -8,12 +8,13 @@
           "clientSecretSettingName": "AAD_CLIENT_SECRET"
         }
       }
-    }
+    },
+    "rolesSource": "/api/GetRoles"
   },
   "routes": [
     {
       "route": "/*",
-      "allowedRoles": ["authenticated"]
+      "allowedRoles": ["legal"]
     }
   ],
   "responseOverrides": {
