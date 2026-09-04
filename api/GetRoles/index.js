@@ -1,8 +1,12 @@
 module.exports = async function (context, req) {
-  context.log("Claims received:", JSON.stringify(req.body));
+  const claims = req.body?.claims || [];
+  const legalGroupId = "4809f241-0a7a-408f-8ce8-e80b62b13753";
+  const groupsClaim = claims.filter(c => c.typ === "groups");
+  const isLegalMember = groupsClaim.some(c => c.val === legalGroupId);
+
   context.res = {
     body: {
-      roles: ["legal"]
+      roles: isLegalMember ? ["legal"] : []
     }
   };
 };
