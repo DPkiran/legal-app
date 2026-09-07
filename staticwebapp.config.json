@@ -8,19 +8,19 @@
           "clientSecretSettingName": "AAD_CLIENT_SECRET"
         }
       }
-    },
-    "rolesSource": "/api/GetRoles"
+    }
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "frame-ancestors 'self' https://teams.microsoft.com https://*.teams.microsoft.com https://*.office.com;"
   },
   "routes": [
     {
-      "route": "/*",
+      "route": "/api/*",
       "allowedRoles": ["legal"]
+    },
+    {
+      "route": "/*",
+      "allowedRoles": ["anonymous"]
     }
-  ],
-  "responseOverrides": {
-    "401": {
-      "redirect": "/.auth/login/aad",
-      "statusCode": 302
-    }
-  }
+  ]
 }
