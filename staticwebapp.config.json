@@ -11,7 +11,7 @@
     }
   },
   "globalHeaders": {
-    "Content-Security-Policy": "frame-ancestors 'self' https://teams.microsoft.com https://*.teams.microsoft.com https://*.office.com;"
+    "Content-Security-Policy": "frame-ancestors 'self' https://teams.microsoft.com https://*.teams.microsoft.com https://*.office.com https://*.teams.live.com;"
   },
   "routes": [
     {
