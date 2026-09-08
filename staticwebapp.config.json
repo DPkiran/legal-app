@@ -1,6 +1,6 @@
 {
   "auth": {
-    "identityProviders": {
+    "identityProvider": {
       "azureActiveDirectory": {
         "registration": {
           "openIdIssuer": "https://login.microsoftonline.com/71b778b1-0a13-4b09-bd42-94367e4d13a2/v2.0",
@@ -20,13 +20,7 @@
     },
     {
       "route": "/*",
-      "allowedRoles": ["authenticated"]
+      "allowedRoles": ["anonymous"]
     }
-  ],
-  "responseOverrides": {
-    "401": {
-      "statusCode": 302,
-      "redirect": "/.auth/login/aad"
-    }
-  }
+  ]
 }
